@@ -1,0 +1,19 @@
+.userAlignment{
+    text-align: center;
+
+    vertical-align: middle;
+    display: table;
+    height: 2.5em;
+}
+
+@media (min-width: 35em) {
+    .userAlignment{
+        height: 55px;
+    }
+}
+
+.userButtons{
+    display: table-cell;
+    vertical-align: middle;
+
+}

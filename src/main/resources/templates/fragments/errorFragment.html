@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+
+<body>
+
+
+
+<div th:fragment="errors">
+    <link rel="stylesheet" href="/css/error.css">
+    <div th:each="error : ${errors}">
+        <div th:replace="fragments/errorFragment :: error"></div>
+    </div>
+</div>
+
+
+
+
+<div th:fragment="error">
+    <div class = "error">
+        <p th:text="@{ '❗  ' + ${error} + ''}"> ERROR TEMPLATE</p>
+    </div>
+</div>
+
+</body>
+</html>

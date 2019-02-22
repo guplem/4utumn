@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn &ndash; Create note </title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/forms.css">
+
+</head>
+<body>
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+
+<div class = "title-area non-selectable">
+    <h1>Create a new Leaf</h1>
+</div>
+
+<div class="content form">
+
+
+
+        <div th:if="${#ctx.containsVariable('notes')}" class="parentNote" >
+            <h2>In reply of:</h2>
+            <div th:replace="fragments/noteFragment :: notes"></div>
+        </div>
+
+
+        <form class="pure-form" method="POST" th:object="${note}" id="newNoteForm">
+
+
+            </br>
+            <div class="pure-control-group writeNoteArea">
+                <textarea class = "note" th:field="*{content}" placeholder="Write here the Leaf's content..." form="newNoteForm" maxlength="500"> </textarea>
+            </div>
+
+            <!-- ERRORS -->
+            <div align = "center" class="errors" th:if="${errors.size()>0}">
+                </br>
+                <div th:replace="fragments/errorFragment :: errors"></div>
+            </div>
+            <!-- END ERRORS -->
+
+            </br>
+            <input class="pure-button" type="submit" value="Create Leaf" />
+
+        </form>
+
+
+
+
+
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

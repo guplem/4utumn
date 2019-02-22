@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+
+<body>
+
+
+<div th:fragment="footer">
+
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <!-- ============= FOOTER SCRIPT ============== -->
+    <script>
+
+
+        function doFooterSticky() {
+
+            var ftr = document.getElementById("myFooter");
+            ftr.style.visibility='hidden';
+
+            if (document.body.scrollHeight + 15 < window.innerHeight)
+                ftr.classList.add("sticky-footer");
+            else
+                ftr.classList.remove("sticky-footer");
+
+            ftr.style.visibility='visible';
+        }
+
+        window.onloadstart = function() { doFooterSticky(); };
+        window.onload = function() { doFooterSticky(); };
+        window.onresize = function() { doFooterSticky(); };
+
+
+    </script>
+    <!-- =================================== -->
+
+
+    <!-- ============= FOOTER ============== -->
+    <div class = "footer non-selectable" id = "myFooter">
+        <a th:if="${#ctx.containsVariable('principal')}" th:unless="${principal.getName().isEmpty()}" href="/feed">Home</a>
+        <a th:unless="${#ctx.containsVariable('principal')}" href="/">Home</a>
+        <a href="#" onclick="goBack()">Go back</a> <script> function goBack() { window.history.back(); } </script>
+        <a th:if="${#ctx.containsVariable('principal')}" th:unless="${principal.getName().isEmpty()}" href="/logout">Log out</a>
+    </div>
+    <!-- =================================== -->
+
+
+
+
+</div>
+</body>
+</html>

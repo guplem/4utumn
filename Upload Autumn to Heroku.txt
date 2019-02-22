@@ -1,0 +1,9 @@
+Tutorial: https://devcenter.heroku.com/articles/git
+
+Login Heroku:
+Email: autumn.social.network@gmail.com
+Pass: 4utumN2018*
+
+Resumen:
+1. cmd e ir a la ubicación de Autumn
+2. git push heroku master

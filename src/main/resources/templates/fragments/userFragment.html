@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+
+<body>
+
+
+<div th:fragment="users">
+    <link rel="stylesheet" href="/css/note.css">
+    <link rel="stylesheet" href="/css/user.css">
+    <div th:each="user : ${users}" th:id="'user_' + ${user.getOriginalUser().getUsername()}">
+
+        <div th:replace="fragments/userFragment :: userModel"></div>
+
+    </div>
+</div>
+
+
+
+
+<div th:fragment="userModel">
+
+
+    <!-- ============= NOTE ============== -->
+
+    <div class = "card">
+
+
+
+
+        <div class="pure-g" >
+            <div class="pure-u-1 pure-u-sm-1-2 noteUserInfo userAlignment">
+
+
+
+
+                <p>
+
+                    <a th:href="@{'/profile/'+${user.getOriginalUser().getUsername()}}" href="templateRouteToProfile">
+                        <noteUserEmoji th:text="${user.getEmoji()}" class ="non-selectable">👤</noteUserEmoji>
+                        <noteDisplayName th:text="${user.getOriginalUser().getDisplay_name()}">displayNameTemplate</noteDisplayName>
+                        <noteUsername th:text="${user.getOriginalUser().getUsername()}">userNameTemplate</noteUsername>
+                    </a>
+
+                </p>
+
+                <p th:text="@{ '' + ${user.getFollowers()} + ' Followers' + ' | ' + ${user.getNotesCount()} + ' Leaves'  + ' | ' + ${user.getKarma()} + ' Karma' }">
+                    X Followers   X Leaves
+                </p>
+
+
+
+
+
+            </div>
+            <div class="pure-u-1 pure-u-sm-1-2 non-selectable userAlignment" >
+
+                <div class="userButtons">
+
+                    <form th:if="${(#ctx.containsVariable('principal')) && (user.getOriginalUser().getUsername().compareTo(principal.getName()) != 0)&& !user.blocked}"  style="display: inline-block" class="pure-form pure-form-aligned" method="POST" th:action="@{'/follow/'+${user.getOriginalUser().getUsername()}}">
+
+                        <input th:if="${!user.isFollowing()}" class="pure-button"  type="submit" value="Follow" />
+                        <input th:if="${user.isFollowing()}"  class="pure-button less-important-button"  type="submit" value="Unfollow" />
+
+                    </form>
+
+                    <form th:if="${(#ctx.containsVariable('principal')) && (user.getOriginalUser().getUsername().compareTo(principal.getName()) != 0)&& user.blocked}"  style="display: inline-block" class="pure-form pure-form-aligned" method="POST" th:action="@{'/block/'+${user.getOriginalUser().getUsername()}}">
+                        <input class="pure-button less-important-button alert-button"  type="submit" value="Unblock" />
+                    </form>
+
+
+                    <form style="display: inline-block" class="pure-form pure-form-aligned" th:action="@{'/profile/'+${user.getOriginalUser().getUsername()}}">
+                        <input class="pure-button"  type="submit" value="See profile" />
+                    </form>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- =================================== -->
+
+
+
+</div>
+</body>
+</html>

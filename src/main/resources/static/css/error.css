@@ -1,0 +1,25 @@
+.error{
+    border-radius: var(--border-global-radius);
+    margin: 5px 0px 5px 0px; /* top, right, bottom, left*/
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 62%;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    color: var(--error-text-color);
+    background: var(--error-background-color);
+    border-width : 0px;
+    border-left: 3px solid var(--error-accent-color);
+
+    opacity: 1;
+    margin-bottom: 1rem;
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+.error p {
+    margin: 2px 5px 2px 5px; /* top, right, bottom, left*/
+}

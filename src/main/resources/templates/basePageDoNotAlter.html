@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn - TITLE</title> <!--Here the tab title-->
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <!-- additional css styles here -->
+
+</head>
+
+<div class = "title-area non-selectable">
+    <h1><!-- Top title here --></h1>
+</div>
+
+<body>
+
+    <div th:replace="fragments/topBar :: topBar"></div>
+
+    <div class = "content">
+
+
+
+
+        <!-- webpage content here -->
+
+        <div class ="InfoText">
+            <!-- Write inside this class write the additional information -->
+        </div>
+
+
+    </div>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

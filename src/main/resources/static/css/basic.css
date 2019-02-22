@@ -1,0 +1,171 @@
+/*======================================================================================================================
+ * -- BASE STYLES --
+ * Most of these are inherited from Base, but I want to change a few.
+ */
+body {
+    line-height: 1.7em;
+    color: var(--secondary-text-color); /*standard text color - secondary text color*/
+    font-size: 16px; /*before = 13px*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: var(--back-background-color);
+}
+
+/* We increase the body font size */
+
+
+.content{
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    color: var(--primary-text-color);
+}
+
+@media (min-width: 35em) {
+    body {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 40em){
+    .content{
+        max-width: 40em;
+    }
+}
+@media (max-width: 40em){
+    .content{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+.left-float {
+    float: left;
+    text-align: left;
+}
+.right-float {
+    float: right;
+    text-align: right;
+}
+
+
+/*======================================================================================================================
+ * -- PURE BUTTON STYLES --
+ * I want my pure-button elements to look a little different
+ */
+.pure-button { /*Basic for buttons*/
+    background-color: var(--accent-color); /*button bg color - accent color*/
+    color: var(--text-primary-color); /*button text color - text/icon primary color*/
+    padding: 0.5em 2em;
+    border-radius: var(--border-global-radius);
+    border: 1px solid var(--accent-color);
+}
+
+a.pure-button-primary { /*Basic for buttons*/
+    background-color: var(--accent-color); /*button bg color - accent color*/
+    color: var(--text-primary-color); /*button text color - text/icon primary color*/
+    border: 1px solid var(--accent-color);
+    font-size: 120%;
+}
+
+.less-important-button:hover{
+    background: var(--accent-color);
+    color: var(--text-primary-color);
+    border: 1px solid var(--accent-color);
+}
+.less-important-button{ /*Is not showed as a priority button*/
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.alert-button:hover{ /*Alerts the user that is an "important" action*/
+    background: var(--default-primary-color);
+    color: var(--text-primary-color);
+    border: 1px solid  var(--default-primary-color);
+}
+
+.pure-button:hover {
+    filter: alpha(opacity=90);
+    background-image: -webkit-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+    background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+}
+
+
+
+
+
+
+
+
+/*======================================================================================================================
+ * Non selectable class */
+.non-selectable{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+
+
+/*======================================================================================================================
+ * This is the class used for the title of each page*/
+.title-area {
+    background: var(--default-primary-color);
+    margin-top: -50px;
+    padding-top: 50px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.title-area h1{
+    color: var(--text-primary-color);
+}
+
+
+
+
+/*======================================================================================================================
+ * This are the basics container of information*/
+.card {
+    border: 1px solid var(--divider-color);
+    background: var(--content-background-color);
+    border-radius: var(--border-global-radius);
+    margin: 5px 0px 5px 0px; /* top, right, bottom, left*/
+    text-align: left;
+    padding: 0.5em;
+    overflow: hidden;
+    display: block;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+
+
+.card a, .card p{
+    margin: 0px 5px 0px 5px; /* top, right, bottom, left*/
+}
+
+
+.InfoText{
+    text-decoration: none;
+    color: var(--primary-text-color);
+}
+
+.InfoText a{
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--default-primary-color);
+    margin: 0px 0px 0px 0px; /* top, right, bottom, left*/
+}
+
+.InfoText p{
+    text-decoration: none;
+    color: var(--primary-text-color);
+}
+

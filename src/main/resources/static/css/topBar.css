@@ -1,0 +1,162 @@
+/*======================================================================================================================
+ * -- TOP BAR STYLES --
+ * I want to customize how my .pure-menu looks at the top of the page
+ */
+
+.home-menu {
+    padding: 0.5em;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
+    height: 4em;
+}
+
+.home-menu {
+    background: var(--dark-primary-color); /*top menu background color  - dark primary color*/
+}
+.pure-menu {
+    border-bottom: none;
+    /* I need a higher z-index here because of the scroll-over effect. */
+    z-index: 4;
+}
+
+.autummn-menu-relative{
+    position:relative;
+    top: 0;
+    width: 100%;
+}
+
+.autumn-menu-fixed{
+    position:fixed;
+    top: 0;
+    width: 100%;
+}
+
+.autumn-menu-fixed + .topBarBugFix {
+    padding-top: 4em;
+}
+
+
+
+.home-menu .pure-menu-heading {
+    color: var(--text-primary-color); /*color of yop-menu title / text color*/
+    font-weight: 400;
+    font-size: 120%;
+}
+
+
+.home-menu a {
+    color: var(--text-primary-color); /*items in menu color - text color*/
+}
+.home-menu li a:hover,
+.home-menu li a:focus {
+    background: none;
+    border: none;
+    color: var(--light-primary-color); /*menu focus color - light primary color*/
+}
+
+
+
+
+
+/*====================================================================================================================
+* --Dropdown top bar --
+*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--dark-primary-color);
+    border-bottom-left-radius: var(--border-global-radius);
+    border-bottom-right-radius: var(--border-global-radius);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    text-align: right;
+    color: var(--text-primary-color);
+    text-decoration: none;
+    display: block;
+    padding: 12px 16px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+
+
+
+/*====================================================================================================================
+* --Searcher --
+*/
+
+#searcher {
+    background: transparent;
+    color: var(--text-primary-color); /* color fo the written text if not focus*/
+    border: 0 none;
+    width: 1.5em;
+    height: 1.5em;
+    -webkit-border-radius: var(--border-global-radius);
+    -moz-border-radius: var(--border-global-radius);
+    border-radius: var(--border-global-radius);
+    padding: 0px 0.5em 0px 0px;
+    text-align: right;
+}
+
+#searcher::placeholder{
+    color: var(--text-primary-color);
+}
+
+@media (min-width: 48em) {
+    #searcher::placeholder{
+        font-size: 1.3em;
+    }
+}
+
+#searcher:focus {
+    background: white;
+    color: var(--secondary-text-color);
+    width:150px;
+    outline: none;
+}
+#searcher:focus::placeholder{
+    color: var(--secondary-text-color);
+}
+
+#searcher {
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+}
+
+
+
+
+/*======================================================================================================================
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ * On tablets and other medium-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 35em) {
+
+    /* We can align the menu header to the left, but float the
+    menu items to the right. */
+    .home-menu {
+        text-align: left;
+    }
+
+    .home-menu ul {
+        float: right;
+    }
+
+}

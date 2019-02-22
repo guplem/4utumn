@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn &ndash; Error</title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <!-- additional css styles here -->
+
+</head>
+
+<body>
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+<div class = "title-area non-selectable">
+    <h1>Error</h1>
+</div>
+
+<div class = "content">
+
+
+    <div class ="InfoText">
+        </br>
+        <p>
+
+            We're sorry but something went terribly wrong.</br>
+            </br>
+            This can be caused by so many reasons that we can not even list them.</br>
+            </br>
+            We apologize for any inconvenience.
+
+
+
+        </p>
+    </div>
+
+    <div th:replace="fragments/emptyPageButtons :: buttons"></div>
+
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

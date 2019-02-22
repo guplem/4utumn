@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+
+<body>
+
+<div th:fragment="notes">
+    <link rel="stylesheet" href="/css/note.css">
+    <div th:each="completeNote : ${notes}" th:id="'note_' + ${completeNote.getId()}">
+        <div th:replace="fragments/noteFragment :: completeNoteModel"></div>
+    </div>
+
+</div>
+
+
+
+
+<div th:fragment="completeNoteModel">
+    <!-- using "completeNote" as note name variable -->
+    <!-- WITH: th:with="completeNote=${oldNoteVar}" -->
+
+    <!-- ============= NOTE ============== -->
+
+    <div class = "card" th:classappend="${completeNote.getRepliedNoteId()!=0} ? replyNote">
+        <div class = "noteUserInfo">
+
+                <a th:href="@{'/profile/'+${completeNote.getUsername()}}" href="templateRouteToProfile">
+                    <noteUserEmoji th:text="${completeNote.emoji}" class ="non-selectable">🍂</noteUserEmoji>
+                    <noteDisplayName th:text="${completeNote.getCreatorDisplayName()}">displayNameTemplate</noteDisplayName>
+                    <noteUsername th:text="${completeNote.getUsername()}"> userNameTemplate </noteUsername>
+                </a>
+
+                <div class="right-float non-selectable">
+                    <p><dateNote th:text="${completeNote.creationDate}"> userNameTemplate </dateNote></p>
+                </div>
+
+        </div>
+
+        <div class="noteTextContent">
+            <div class ="InfoText">
+                <p th:id="'noteText_' + ${completeNote.getId()}" th:text="${completeNote.getContent()}">MessageTemplate</p>
+            </div>
+        </div>
+
+        <script th:inline="javascript">
+            var textId = /*[['noteText_' + ${completeNote.getId()} +'']]*/ 'test';
+            var p = document.getElementById(textId);
+            var string = p.innerHTML;
+            p.innerHTML = (string.toString().replace(/#(\S*)/g,'<a href="/search/$1" title="Find more with \'$1\'" >#$1</a>'));
+            string = p.innerHTML;
+            p.innerHTML = (string.toString().replace(/@(\S*)/g,'<a href="/profile/$1" title="See $1\'s profile" >@$1</a>'));
+
+            string = p.innerHTML;
+            //URLs starting with http://, https://, or ftp://
+            replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+            p.innerHTML = string.toString().replace(replacePattern1, '<a href="$1" target="_blank" title="Go to $1" >$1</a>');
+
+            string = p.innerHTML;
+            //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+            replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+            p.innerHTML = string.toString().replace(replacePattern2, '$1<a href="http://$2" target="_blank" title="Go to $1" >$2</a>');
+        </script>
+
+        <!-- IF LOGGED IN -->
+        <div th:if="${#ctx.containsVariable('principal')}">
+
+            <div class = "noteButtons non-selectable">
+                <div class="right-float">
+                    <form th:if="${principal.getName()==completeNote.getUsername()}" method="POST" th:action="@{'/delete/'+${completeNote.getId()}}">
+                        <input type="submit" title = "Delete" value="🗑️"/>
+                    </form>
+                    <a th:if="${completeNote.getRepliedNoteId()==0}" title = "Reply" th:href="@{'/createNote/'+${completeNote.getId()}}" href="pathRedirectTemplate">💬</a>
+                    <a th:if="${!#ctx.containsVariable('principalNote') && completeNote.getRepliedNoteId()==0}" title = "See replies" th:href="@{'/note/'+${completeNote.getId()}}" href="moreInfoParthTemplare">⤵️</a>
+                    <a th:if="${!#ctx.containsVariable('principalNote') && completeNote.getRepliedNoteId()!=0}" title = "See parent" th:href="@{'/note/'+${completeNote.getRepliedNoteId()}}" href="moreInfoParthTemplare">⤴️️</a>
+                    <a th:if="${!#ctx.containsVariable('principalNote') && #ctx.containsVariable('isNotification') && completeNote.getRepliedNoteId()!=0}" title = "Check as viewed" th:href="@{'/viewed/'+${completeNote.getId()}}" href="moreInfoParthTemplare">✅️️</a>
+
+                </div>
+
+                <!-- Is NOT the author of the note -->
+                <div th:unless="${principal.getName()==completeNote.getUsername()}" class="left-float">
+
+                    <div th:if="${completeNote.getVoteStatus() == 1}">
+                        <form method="POST" th:action="@{'/note/'+${completeNote.getId()}+'/positive'}">
+                            <input type="submit" id="green" th:title="${completeNote.getPositiveVotes()}" title="posVotes" value="⬆️" disabled/>
+                        </form>
+                        <form><votes th:text = "${completeNote.getPositiveVotes()-completeNote.getNegativeVotes()} ">numberOfVotesTemplate</votes></form>
+                        <form method="POST" th:action="@{'/note/'+${completeNote.getId()}+'/negative'}">
+                            <input type="submit" id="gray" th:title="${completeNote.getNegativeVotes()}" title="negVotes" value="⬇️"/>
+                        </form>
+                    </div>
+
+
+                    <div th:if="${completeNote.getVoteStatus() == 0}">
+                        <form method="POST" th:action="@{'/note/'+${completeNote.getId()}+'/positive'}">
+                            <input type="submit" th:title="${completeNote.getPositiveVotes()}" title="posVotes" value="⬆️"/>
+                        </form>
+                        <form><votes th:text = "${completeNote.getPositiveVotes()-completeNote.getNegativeVotes()} ">numberOfVotesTemplate</votes></form>
+                        <form method="POST" th:action="@{'/note/'+${completeNote.getId()}+'/negative'}">
+                            <input type="submit"  th:title="${completeNote.getNegativeVotes()}" title="negVotes" value="⬇️"/>
+                        </form>
+                    </div>
+
+
+                    <div th:if="${completeNote.getVoteStatus() == -1}">
+                        <form method="POST" th:action="@{'/note/'+${completeNote.getId()}+'/positive'}">
+                            <input type="submit"  id="gray" th:title="${completeNote.getPositiveVotes()}" title="posVotes" value="⬆️"/>
+                        </form>
+                        <form><votes th:text = "${completeNote.getPositiveVotes()-completeNote.getNegativeVotes()} ">numberOfVotesTemplate</votes></form>
+                        <form method="POST" th:action="@{'/note/'+${completeNote.getId()}+'/negative'}">
+                            <input type="submit" id="red"  th:title="${completeNote.getNegativeVotes()}" title="negVotes" value="⬇️" disabled/>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- Is the author of the note -->
+                <div th:if="${principal.getName()==completeNote.getUsername()}" class="left-float">
+                    <div class="left-float">
+                        <form>
+                            <input type="submit"  id="gray" th:title="${completeNote.getPositiveVotes()}" title="posVotes" value="⬆️" disabled/>
+                        </form>
+                        <form><votes th:text = "${completeNote.getPositiveVotes()-completeNote.getNegativeVotes()} ">numberOfVotesTemplate</votes></form>
+                        <form>
+                            <input type="submit" id="gray"  th:title="${completeNote.getNegativeVotes()}" title="negVotes" value="⬇️" disabled/>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- IF NOT LOGGED IN -->
+        <div th:unless="${#ctx.containsVariable('principal')}">
+            <div class = "noteButtons non-selectable">
+                <div class="right-float">
+                    <a th:if="${completeNote.getRepliedNoteId()==0}" title = "Reply" th:href="@{'/createNote/'+${completeNote.getId()}}" href="pathRedirectTemplate">💬</a>
+                    <a th:if="${completeNote.getRepliedNoteId()==0}" title = "See replies" th:href="@{'/note/'+${completeNote.getId()}}" href="moreInfoParthTemplare">⤵️</a>
+                    <div th:unless="${#ctx.containsVariable('principalNote')}">
+                        <a th:if="${completeNote.getRepliedNoteId()!=0}" title = "See parent" th:href="@{'/note/'+${completeNote.getRepliedNoteId()}}" href="moreInfoParthTemplare">⤴️️</a>
+                    </div>
+                </div>
+
+                <div class="left-float">
+                    <form>
+                        <input type="submit"  id="green" th:title="${completeNote.getPositiveVotes()}" title="posVotes" value="⬆️" disabled/>
+                    </form>
+                    <form><votes th:text = "${completeNote.getPositiveVotes()-completeNote.getNegativeVotes()} ">numberOfVotesTemplate</votes></form>
+                    <form>
+                        <input type="submit" id="red"  th:title="${completeNote.getNegativeVotes()}" title="negVotes" value="⬇️" disabled/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================== -->
+
+
+
+</div>
+</body>
+</html>

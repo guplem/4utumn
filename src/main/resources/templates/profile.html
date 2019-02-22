@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title th:if="${username == null}" th:text="${'4utumn &ndash; '+user.getUsername()}">Template title</title>
+    <title th:if="${username != '-'}" th:text="${'4utumn &ndash; '+username}">Template title</title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/profile.css">
+
+
+</head>
+<body>
+
+    <div th:replace="fragments/topBar :: topBar"></div>
+
+    <div class = "title-area non-selectable">
+        <h1 th:if="${username == null}" th:text="@{${emoji}+'  '+${user.display_name} + ' ('+${user.username}+')'}">TemplateUsername</h1>
+        <h1 th:if="${username != '-'}" th:text="@{${username}}">TemplateUsername</h1>
+    </div>
+
+
+
+    <div class="content">
+
+        <div th:if="${#ctx.containsVariable('username') == false}">
+            <div class ="InfoProfileText" >
+                <div class="card InfoProfileText">
+                    <p>
+                        <profileInfo th:text="@{'Leaves: '+${noteCount}}">  </profileInfo>
+                        <a th:href="@{'/users/'+${user.username}+'/followers'}"> <profileInfo th:text="@{' | Followers: '+${followers}}">  </profileInfo> </a>
+                        <a th:href="@{'/users/'+${user.username}+'/followed'}"> <profileInfo th:text="@{' | Follows: '+${follows}}">  </profileInfo> </a>
+                        <profileInfo th:text="@{' | Karma: '+${karma}}">  </profileInfo>
+                    </p>
+                </div>
+
+
+                <div th:if="${#ctx.containsVariable('principal') && principal.getName() != user.username }">
+                    <form style="display: inline-block" th:if="${!blocked}"  class="pure-form pure-form-aligned" method="POST" th:action="@{'/follow/'+${user.username}}">
+                        <input th:if="${!following}" class="pure-button"  type="submit" value="Follow" />
+                        <input th:if="${following}"  class="pure-button less-important-button"  type="submit" value="Unfollow" />
+                    </form>
+
+
+                    <form style="display: inline-block" class="pure-form pure-form-aligned" method="POST" th:action="@{'/block/'+${user.username}}">
+                        <input th:if="${!blocked}" class="pure-button less-important-button alert-button"  type="submit" value="Block" />
+                        <input th:if="${blocked}" class="pure-button less-important-button alert-button"  type="submit" value="Unblock" />
+                    </form>
+                </div>
+
+            </div>
+
+
+            <div th:if="${!blocked}">
+                <div th:replace="fragments/noteFragment :: notes"></div>
+
+                <div th:if="${notes.size()<=0}" class ="InfoText">
+                    <p th:if="${#ctx.containsVariable('principal') && principal.getName() == user.username }">You have not published notes yet.</p>
+                    <p th:unless="${#ctx.containsVariable('principal') && principal.getName() == user.username }" th:text="@{${user.display_name} + ' has not published leaves yet.'}">No notes found for this user</p>
+                </div>
+                <a th:if="${#ctx.containsVariable('principal') && notes.size()<=0 && principal.getName() == user.username }"th:href="@{'/createNote'}" class="pure-button" >Write your first leaf now!</a>
+            </div>
+        </div>
+
+
+        <div th:if="${#ctx.containsVariable('username')}">
+            <div class ="InfoText">
+                </br>
+                <p th:text="@{'We have not found the user &quot' +${username} + '&quot'}">Usr not found</p>
+            </div>
+
+
+            <div th:replace="fragments/emptyPageButtons :: buttons"></div>
+
+        </div>
+
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+    
+
+</body>
+</html>

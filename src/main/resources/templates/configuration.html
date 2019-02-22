@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn &ndash; Configuration </title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/forms.css">
+
+</head>
+
+<body>
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+<div class = "title-area non-selectable">
+    <h1>Configuration</h1>
+</div>
+
+<div class = "content form">
+
+
+
+
+    <form class="pure-form pure-form-aligned" method="POST" th:object="${toUpdate}" th:action="@{'/configuration'}">
+
+        </br>
+        <fieldset>
+
+        <div class ="card"> <center>
+            <div class="pure-control-group">
+                <label>Name</label>
+                <input type="text" th:field="*{display_name}" placeholder="Display name" value="valueTemplate" th:value="${toUpdate.getDisplay_name()}"/>
+            </div>
+            <div class="pure-control-group">
+                <label>Email</label>
+                <input type="text" th:field="*{email}" placeholder="Email" value="valueTemplate" th:value="${toUpdate.getEmail()}"/>
+            </div>
+            <div class="pure-control-group">
+                <label>Password</label>
+                <input type="password" th:field="*{password}" placeholder="Password"/>
+            </div>
+        </div></center>
+        <div class ="card"><center>
+            <div class="pure-control-group">
+                <label>New Password</label>
+                <input type="password" th:field="*{newPassword}" placeholder="New Password"/>
+            </div>
+            <div class="pure-control-group">
+                <label>Confirm New Password</label>
+                <input type="password" th:field="*{newPasswordConfirmed}" placeholder="Confirm new Password"/>
+            </div>
+        </div></center>
+
+            <!-- ERRORS -->
+            <div align = "center" class="errors" th:if="${errors.size()>0}">
+                </br>
+                <div th:replace="fragments/errorFragment :: errors"></div>
+            </div>
+            <!-- END ERRORS -->
+
+            </br>
+            <input class="pure-button pure-button-primary" type="submit" value="Update information" />
+        </fieldset>
+
+    </form>
+    <form style="display: inline-block" class="pure-form pure-form-aligned" th:action="@{'/users/'+${toUpdate.getUsername()}+'/blocked'}">
+        <input class="pure-button less-important-button alert-button"  type="submit" value="See Blocked Users" />
+    </form>
+
+    <form style="display: inline-block" class="pure-form pure-form-aligned" th:action="@{'/deleteUser'}">
+        <input class="pure-button less-important-button alert-button"  type="submit" value="Delete Account" />
+    </form>
+
+
+
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

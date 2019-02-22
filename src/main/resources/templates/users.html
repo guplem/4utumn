@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title th:text="${'4utumn &ndash; '+typelist}">Template title</title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/forms.css">
+
+
+</head>
+<body>
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+
+<div class = "title-area non-selectable">
+
+    <h1 th:text="@{${username}+'\'s list of '+${typelist}}">userListTemplateTitle</h1>
+
+</div>
+
+
+<div class = "content">
+
+
+
+    <div th:if="${users.size()>0}">
+        <div th:replace="fragments/userFragment :: users"></div>
+    </div>
+
+    <div th:if="${users.size()<=0}">
+        <div class ="InfoText">
+            <br>
+            <p th:if="${users.size()<=0 && principal.getName()!=username}" th:text="@{${username} + ' does not have any ' +${typelist} }">No results found.</p>
+            <p th:if="${users.size()<=0 && principal.getName()==username}" th:text="@{'You do not have any ' +${typelist} }">No results found.</p>
+        </div>
+
+        <div th:replace="fragments/emptyPageButtons :: buttons"></div>
+    </div>
+
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+</body>
+</html>

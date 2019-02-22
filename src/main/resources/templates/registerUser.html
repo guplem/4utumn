@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn &ndash; Sign up </title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/forms.css">
+
+
+</head>
+<body>
+
+    <div th:replace="fragments/topBar :: topBar"></div>
+
+
+    <div class = "title-area non-selectable">
+        <h1>Register</h1>
+    </div>
+
+
+<div class = "content form">
+
+
+
+        <form class="pure-form pure-form-aligned" method="POST" th:object="${user}">
+
+
+
+
+
+
+
+            </br>
+            <fieldset>
+                <div class="pure-control-group">
+                    <label>Username</label>
+                    <input type="text" th:field="*{username}" placeholder="Username"/>
+                </div>
+                <div class="pure-control-group">
+                    <label>Name</label>
+                    <input type="text" th:field="*{display_name}" placeholder="Display name"/>
+                </div>
+                <div class="pure-control-group">
+                    <label>Email</label>
+                    <input type="text" th:field="*{email}" placeholder="Email"/>
+                </div>
+                <div class="pure-control-group">
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}" placeholder="Password"/>
+                </div>
+
+                <!-- ERRORS -->
+                <div align = "center" class="errors" th:if="${errors.size()>0}">
+                    </br>
+                    <div th:replace="fragments/errorFragment :: errors"></div>
+                </div>
+                <!-- END ERRORS -->
+
+                </br>
+                <input class="pure-button" type="submit" value="Register" />
+            </fieldset>
+
+        </form>
+
+
+    <div class ="InfoText">
+        <p>Already 4utumnal? <a href="/login">LOG IN</a></p>
+    </div>
+
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

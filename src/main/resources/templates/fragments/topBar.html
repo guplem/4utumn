@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+
+<body>
+
+
+<div th:fragment="topBar">
+
+    <link rel="stylesheet" href="/css/topBar.css">
+
+    <!-- ============= TOP BAR ============= -->
+    <div class="home-menu pure-menu pure-menu-horizontal autummn-menu-relative non-selectable autumn-menu-fixed" id="myHeader">
+        <!-- IF LOGGED IN -->
+        <div th:if="${#ctx.containsVariable('principal')}">
+            <!-- LEFT -->
+            <a class="pure-menu-heading" title = "Feed" href="/feed">4UTUMN</a>
+
+            <!-- RIGHT -->
+            <ul class="pure-menu-list" >
+
+                <li class="pure-menu-item"> <input type="text" onBlur="clearSearchInput()" placeholder="⌕" id="searcher"> </li>
+
+                <li class="pure-menu-item"> <a href="/createNote" class="pure-menu-link">Create Leaf</a></li>
+
+                <li class="pure-menu-item">
+                    <div class="dropdown">
+                        <a class="dropbtn pure-menu-link" th:text="${principal.getName()}" > usernameTemplate </a>
+                        <div class="dropdown-content">
+                            <a th:href="@{'/profile/'+${principal.getName()}}" href="pathRedirectTemplate">Profile</a>
+                            <a href="/feed">Feed</a>
+                            <a href="/notifications">Replies</a>
+                            <a href="/mentions">Mentions</a>
+                            <a th:href="@{'/users/'+${principal.getName()}+'/suggested'}" href="pathRedirectTemplate">Suggested users</a>
+                            <a th:href="@{'/users/'+${principal.getName()}+'/random'}" href="pathRedirectTemplate">Random users</a>
+                            <a href="/configuration">Configuration</a>
+                            <a href="/logout">Log out</a>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- IF NOT LOGGED IN -->
+        <div th:unless="${#ctx.containsVariable('principal')}">
+            <!-- LEFT -->
+            <a class="pure-menu-heading" href="/">4UTUMN</a>
+
+            <!-- RIGHT -->
+            <ul class="pure-menu-list" >
+
+                <li class="pure-menu-item"> <input type="text" onBlur="clearSearchInput()" placeholder="⌕" id="searcher"> </li>
+
+                <li class="pure-menu-item"> <a href="/registerUser" class="pure-menu-link">Sign Up</a></li>
+
+                <li class="pure-menu-item"> <a href="/login" class="pure-menu-link">Log in</a> </li>
+
+            </ul>
+        </div>
+
+    </div>
+    <!-- =================================== -->
+
+    <div class = "topBarBugFix"></div>
+
+    <!-- ============= SEARCH TOP BAR SCRIPT ============= -->
+    <script>
+        document.getElementById("searcher")
+            .addEventListener("keyup", function(event) {
+                event.preventDefault();
+                if (event.keyCode === 13) { search(); }
+            });
+        function search() {
+            if (!(document.getElementById("searcher").value.toString().replace(/ /g,'') === "")) {
+                window.location.href='/search/'+document.getElementById("searcher").value.toString().trim();
+            }
+        }
+        function clearSearchInput(){
+            document.getElementById("searcher").value = "";
+        }
+    </script>
+    <!-- =================================== -->
+
+</div>
+</body>
+</html>

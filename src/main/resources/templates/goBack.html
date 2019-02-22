@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn</title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+
+</head>
+
+<body>
+
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+
+<div class = "title-area non-selectable">
+    <h1>Loading...</h1>
+</div>
+
+<div class = "content" style="
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+">
+
+
+    <div th:replace="fragments/loadingFragments :: ${loadingStyle}"></div>
+
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+
+<script>
+    function goBack() {
+        <!--alert(document.referrer);-->
+        window.history.back();
+    }
+
+    window.onloadstart = function() { doFooterSticky(); goBack(); };
+    window.onload = function() { doFooterSticky(); goBack(); };
+    window.onresize = function() { doFooterSticky(); goBack(); };
+</script>
+
+
+</html>

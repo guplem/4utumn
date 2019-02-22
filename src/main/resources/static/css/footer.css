@@ -1,0 +1,25 @@
+
+/*======================================================================================================================
+ * This is the class used for the footer */
+.sticky-footer { /*If the footer must be sticked at the bottom of the screen*/
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer {
+    background: var(--footer-color);
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    padding: 5px 5px 5px 5px;
+    visibility: hidden; /*changed via savascript after calculating if it has to be sticky'*/
+    box-shadow: 0px 20px var(--footer-color); /*Glitch fix*/
+}
+
+.footer a, .footer p{
+    text-decoration: none;
+    color: var(--secondary-text-color);
+    margin: 0px 5px 0px 5px; /* top, right, bottom, left*/
+}
+

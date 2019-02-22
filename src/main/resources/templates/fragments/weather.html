@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Setup</title>
+</head>
+<body>
+<div th:fragment="weather">
+    <div id="app"></div>
+    <div id="parsed_json_api"></div>
+
+    <script src="index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- https://home.openweathermap.org/api_keys -->
+    <script>
+
+        var textArray = [
+            'Pyongyang',
+            'Bastardo',
+            'Kagar',
+            'Salsipuedes',
+            'Condom',
+            'Dildo',
+            'Mianus',
+            'Warra',
+            'Guarromán',
+            'Zorra',
+            'Puta',
+            'Fucking',
+            'Mataró',
+            'Ojete',
+            'Dick',
+            'Alcantarilla',
+            'Rábano',
+            'Peligros'
+        ];
+        var city = textArray[Math.floor(Math.random()*textArray.length)];
+
+
+        jQuery(document).ready(function($) {
+
+            var parsedData = $('#parsed_json_api');
+
+            $.ajax({
+                url: "https://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=6136f84dc76b2e166827b992968c4483&units=metric&cnt=10",
+                dataType: 'json',
+
+                success: function (data) {
+                    data = JSON.stringify(data);
+                    var jsFormat = JSON.parse(data);
+                    document.getElementById("parsed_json_api").innerHTML = city+' has ' + jsFormat.weather[0].description + '.' + '</br>' + 'It is ' +jsFormat.main.temp + 'ºC with ' + jsFormat.main.humidity + '% humidity.';
+                }
+            });
+        });
+    </script>
+</div>
+
+</body>
+</html>

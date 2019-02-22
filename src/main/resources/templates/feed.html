@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn &ndash; Feed</title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/index.css">
+
+</head>
+<body>
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+<div class = "title-area non-selectable">
+    <h1>Feed</h1>
+</div>
+
+<div class = "content">
+
+    <div th:if="${notes.size()<=0}">
+        <br>
+        <div class ="InfoText">
+            <p>There are no leaves to show in your feed.</p>
+            <p>Follow other users to see their notes!</p>
+        </div>
+
+        <a th:href="@{'/users/'+${principal.getName()}+'/suggested'}" class="pure-button pure-button-primary" style="margin-top: 1em">See suggested users</a>
+        <a th:href="@{'/users/'+${principal.getName()}+'/random'}" class="pure-button pure-button-primary" style="margin-top: 1em">See random users</a>
+        <div class ="InfoText"></br>or</div>
+        <a th:href="@{'/createNote'}" class="pure-button less-important-button" >Write your own leaf</a>
+
+    </div>
+
+    <div th:replace="fragments/noteFragment :: notes"></div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

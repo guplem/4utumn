@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn - Page not not found</title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <!-- additional css styles here -->
+
+</head>
+
+<body>
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+<div class = "title-area non-selectable">
+    <h1>Error: Page not found</h1>
+</div>
+
+<div class = "content">
+
+
+    <div class ="InfoText">
+        </br>
+        <p>
+
+
+            We're sorry but we can not find the page you want to access.</br>
+            </br>
+            This can be caused by several reasons:</br>
+            <b>·</b> Because of an error on our part.</br>
+            <b>·</b> Because the page has been deleted.</br>
+            <b>·</b> Because the URL is misspelled.</br>
+            </br>
+            We apologize for any inconvenience.
+
+
+        </p>
+    </div>
+
+    <div th:replace="fragments/emptyPageButtons :: buttons"></div>
+
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

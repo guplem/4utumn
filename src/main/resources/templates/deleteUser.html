@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn - Delete User</title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/forms.css">
+
+</head>
+
+<body>
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+<div class = "title-area non-selectable">
+    <h1>Delete account</h1>
+</div>
+
+<div class = "content form">
+
+
+
+    <div class ="InfoText">
+        </br>
+        <p>
+            Are you sure you want to delete your account?
+        </br>
+            Write your password to confirm that action.
+
+            <br>
+
+        </p>
+    </div>
+
+    <form class="pure-form pure-form-aligned" method="POST" th:object="${toUpdate}" th:action="@{'/deleteUser'}">
+        <div class="pure-control-group">
+            <label>Password</label>
+            <input type="password" th:field="*{password}" placeholder="Password"/>
+            <br><i>If the password is not written correctly this page will close automatically for security reasons.</i>
+        </div>
+
+
+        </br>
+        <input class="pure-button less-important-button alert-button"  type="submit" value="Delete Account" />
+    </form>
+
+    <div class ="InfoText">
+        <!-- WInside this class write the additional information -->
+    </div>
+
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

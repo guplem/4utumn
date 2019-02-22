@@ -1,0 +1,63 @@
+.noteUserInfo a{
+    text-decoration: none;
+    margin: 0px 5px 0px 5px; /* top, right, bottom, left*/
+    color: var(--primary-text-color);
+}
+
+
+.noteUserInfo noteDisplayName{
+    font-weight: bold;
+    color: var(--primary-text-color);
+}
+
+.noteUserInfo noteUserName{
+    color: var(--secondary-text-color);
+}
+
+dateNote{
+    color: var(--secondary-text-color);
+    opacity: 0.4;
+    vertical-align: top;
+}
+
+.noteButtons a{
+    font-weight:bold;
+    text-decoration: none;
+    margin: 0px 5px 0px 5px; /* top, right, bottom, left*/
+    color: var(--primary-text-color);
+}
+
+.noteButtons form{
+    float:left;
+}
+
+.noteButtons input[type="submit"]{
+    outline:none;
+    background:none;
+    border:none;
+}
+
+
+.card #green {
+    filter: hue-rotate(-110deg);
+}
+
+
+.card #red {
+    filter: hue-rotate(160deg);
+}
+
+.card #gray{
+    filter: grayscale(1) opacity(0.5) ;
+    -webkit-filter: grayscale(1) opacity(0.5) ;
+    -moz-filter: grayscale(1) opacity(0.5) ;
+}
+
+.replyNote{
+    border-left: var(--divider-color) 10px solid;
+}
+
+
+.noteTextContent{
+    margin: 5px 0px 5px 0px;
+}

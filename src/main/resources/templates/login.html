@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn &ndash; Login </title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/forms.css">
+
+
+</head>
+
+<body>
+
+
+
+    <div th:replace="fragments/topBar :: topBar"></div>
+
+    <div class = "title-area non-selectable">
+        <h1>Sign in</h1>
+    </div>
+
+
+<div class = "content form">
+
+
+
+        <form class="pure-form pure-form-aligned" method="POST" action="/login" th:object="${user}">
+
+
+
+            </br>
+            <fieldset>
+                <div class="pure-control-group">
+                    <label for="Username" >Username</label>
+                    <input id="Username" type="text" th:field="*{username}" placeholder="Username"/>
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="Password">Password</label>
+                    <input id="Password" type="password" th:field="*{password}" placeholder="Password"/>
+                </div>
+
+                <!-- ERRORS -->
+                <div align = "center" class="errors" th:if="${errors.size()>0}">
+                    </br>
+                    <div th:replace="fragments/errorFragment :: errors"></div>
+                </div>
+                <!-- END ERRORS -->
+
+                </br>
+                <input class="pure-button" type="submit" value="Sign In" />
+            </fieldset>
+
+        </form>
+
+    <div class ="InfoText">
+        <p>New to 4utumn? <a href="/registerUser">SIGN UP</a></p>
+    </div>
+
+
+</div>
+
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

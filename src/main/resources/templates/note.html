@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>4utumn &ndash; Note</title>
+    <link th:replace="fragments/header :: icon">
+    <meta name="description" content="4utumn social network">
+    <div th:replace="fragments/header :: header"></div>
+
+    <link rel="stylesheet" href="/css/forms.css">
+
+
+</head>
+<body>
+
+<div th:replace="fragments/topBar :: topBar"></div>
+
+<div class = "title-area non-selectable">
+    <h1> Leaf's replies </h1>
+</div>
+
+
+<br>
+<div class = "content">
+
+
+    <div th:if="${principalNote != null}">
+        <link rel="stylesheet" href="/css/note.css">
+        <div th:each="completeNote : ${principalNote}" th:id="'principalNote_' + ${principalNote.getId()}">
+            <div th:replace="fragments/noteFragment :: completeNoteModel"></div>
+        </div>
+    </div>
+
+
+    <div>
+        <h1>Replies</h1>
+        <div th:replace="fragments/noteFragment :: notes"></div>
+
+        <div class ="InfoText">
+            <p th:if="${notes.size()<=0}">This leaf has no replies yet.</p>
+        </div>
+        <a th:if="${notes.size()<=0}" th:href="@{'/createNote/'+${principalNote.getId()}}" class="pure-button" >Write the first reply now!</a>
+        </br>
+        <a th:if="${notes.size()>0}" th:href="@{'/createNote/'+${principalNote.getId()}}" class="pure-button" >Write another reply</a>
+
+
+    </div>
+
+
+</div>
+<br>
+
+
+
+
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+</body>
+</html>
