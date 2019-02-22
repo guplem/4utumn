@@ -1,3 +1,13 @@
+Credentials:
+U: 4utum
+E: autumn.social.network@gmail.com
+P: 4utumN2018
+Heroku P: 4utumN2018*
+Pin atención al cliente: 0707
+
+
+**UPLOAD TO HEROKU**
+
 Tutorial: https://devcenter.heroku.com/articles/git
 
 Login Heroku:
