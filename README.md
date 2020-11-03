@@ -70,4 +70,6 @@
 - Marcar una respuesta comom leída
 - Ver una lista de publicaciones en las que te mencionan
 
-*URL:* http://www.4utumn.xyz
+*URL:* https://autumn-social-network.herokuapp.com/ or http://www.4utumn.xyz
+
+*NOTE: Some features might no longer work due lack of maintenance.
